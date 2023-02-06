@@ -1,11 +1,8 @@
 # Nature of Code
 Closing Keynote for [Booster 2023][conference:booster].
 
-## TODO
-
-The following is a list to do before the actual talk
-
-* [ ] Provide Title, Abstract and Bio
-* [ ] Prepare Talk
+## TiddlyWiki
+We use a [TiddlyWiki][tiddlywiki] to organize our thoughts.
 
 [conference:booster]: https://2023.boosterconf.no/
+[tiddlywiki]: https://tiddlywiki.com/

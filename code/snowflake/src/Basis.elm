@@ -1,4 +1,4 @@
-module Basis exposing (Basis, coordinate, standard, transform)
+module Basis exposing (Basis, basis, coordinate, standard, transform)
 
 import Basis.Coordinate as Coordinate exposing (Axis(..), Coordinate, project)
 import Basis.Location as Location exposing (Location)
@@ -10,6 +10,11 @@ type Basis
         { e1 : Coordinate
         , e2 : Coordinate
         }
+
+
+basis : Coordinate -> Coordinate -> Basis
+basis e1 e2 =
+    Basis { e1 = e1, e2 = e2 }
 
 
 transform : Transform -> Basis -> Basis

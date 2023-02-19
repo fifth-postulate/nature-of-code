@@ -79,17 +79,42 @@ update msg (Scene s) =
                     h
                         |> Maybe.map (isNear s.flake)
                         |> Maybe.withDefault False
-
-                head =
-                    h
-                        |> Maybe.map List.singleton
-                        |> Maybe.withDefault []
             in
             if nearFlake then
+                let
+                    head =
+                        h
+                            |> Maybe.map symmetries
+                            |> Maybe.withDefault []
+                in
                 ( Scene { s | path = [], flake = List.append head s.flake }, Cmd.none )
 
             else
+                let
+                    head =
+                        h
+                            |> Maybe.map List.singleton
+                            |> Maybe.withDefault []
+                in
                 ( Scene { s | path = List.append head s.path }, Cmd.none )
+
+
+symmetries : Location -> List Location
+symmetries l =
+    let
+        a =
+            Location.first l
+
+        b =
+            Location.second l
+    in
+    [ location a b
+    , location -b (a + b)
+    , location (-a - b) a
+    , location -a -b
+    , location b (-a - b)
+    , location (a + b) -a
+    ]
 
 
 isNear : Flake -> Location -> Bool

@@ -1,12 +1,14 @@
 module Basis.CoordinateTest exposing (suite)
 
-import Basis.Coordinate as Coordinate exposing (coordinate, Axis(..))
+import Basis.Coordinate as Coordinate exposing (Axis(..), coordinate)
 import Expect exposing (FloatingPointTolerance(..))
 import Fuzz exposing (niceFloat)
 import Test exposing (Test, describe, fuzz2)
 
+
 epsilon : FloatingPointTolerance
-epsilon = Absolute 0.000000001
+epsilon =
+    Absolute 0.000000001
 
 
 suite : Test

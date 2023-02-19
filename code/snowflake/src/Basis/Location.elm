@@ -1,4 +1,4 @@
-module Basis.Location exposing (Location, add, first, location, second)
+module Basis.Location exposing (Location, add, first, location, second, toString)
 
 
 type Location
@@ -23,3 +23,8 @@ second (Location { v }) =
 add : Location -> Location -> Location
 add p q =
     location (first p + first q) (second p + second q)
+
+
+toString : Location -> String
+toString (Location { u, v }) =
+    "(" ++ String.fromInt u ++ "," ++ String.fromInt v ++ ")"

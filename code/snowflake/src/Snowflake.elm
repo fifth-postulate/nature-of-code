@@ -1,4 +1,4 @@
-module Snowflake exposing (Configuration, Model, Msg(..), ViewBox, hasPath, pathGuard, scene, update, view)
+module Snowflake exposing (Configuration, Flake, Model, Msg(..), Path, ViewBox, hasPath, isNear, pathGuard, scene, update, view)
 
 import Basis exposing (Basis, coordinate)
 import Basis.Coordinate exposing (Axis(..), project)

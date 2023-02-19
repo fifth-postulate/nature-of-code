@@ -4,20 +4,15 @@ import Basis
 import Basis.Coordinate as Coordinate
 import Basis.Location as Location
 import Basis.Transform as Transform
-import Expect exposing (FloatingPointTolerance(..))
+import Expect
 import Fuzz exposing (int)
 import Fuzzers exposing (coordinate)
 import Test exposing (Test, describe, fuzz2, fuzz3)
 
 
-epsilon : FloatingPointTolerance
-epsilon =
-    Absolute 0.000000001
-
-
 suite : Test
 suite =
-    describe "Basis"
+    describe "Snowflake"
         [ describe "transform"
             [ fuzz3 coordinate coordinate Fuzzers.transform "as the coordinates images" <|
                 \a b t ->

@@ -1,7 +1,7 @@
 module Basis.LocationTest exposing (suite)
 
 import Basis.Location as Location exposing (location)
-import Expect 
+import Expect
 import Fuzz exposing (int, pair)
 import Test exposing (Test, describe, fuzz2)
 

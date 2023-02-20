@@ -84,19 +84,26 @@ init configuration snowflake _ =
 
 
 view : Model -> Html Msg
-view { configuration, snowflake, numberOfParticles } =
+view ({ configuration, snowflake } as model) =
     Html.div []
-        [ Html.div []
-            [ Html.input
-                [ Attribute.type_ "range"
-                , Attribute.min <| String.fromInt configuration.minimumNumberOfParticles
-                , Attribute.max <| String.fromInt configuration.maximumNumberOfParticles
-                , Attribute.value <| String.fromInt numberOfParticles
-                , Event.onInput ChangeNumberOfParticles
-                ]
-                []
-            ]
+        [ viewControls model
         , Snowflake.view configuration.snowflake snowflake
+        ]
+
+
+viewControls : Model -> Html Msg
+viewControls { configuration, numberOfParticles, snowflake } =
+    Html.div []
+        [ Html.input
+            [ Attribute.type_ "range"
+            , Attribute.min <| String.fromInt configuration.minimumNumberOfParticles
+            , Attribute.max <| String.fromInt configuration.maximumNumberOfParticles
+            , Attribute.value <| String.fromInt numberOfParticles
+            , Event.onInput ChangeNumberOfParticles
+            ]
+            []
+        , Html.span [] [ Html.text <| String.fromInt <| numberOfParticles ]
+        , Html.span [] [ Html.text <| String.fromInt <| Snowflake.size snowflake ]
         ]
 
 

@@ -12,8 +12,13 @@ import Time exposing (every)
 
 
 type alias Model =
-    { configuration : Snowflake.Configuration
+    { configuration : Configuration
     , snowflake : Snowflake.Model
+    }
+
+
+type alias Configuration =
+    { snowflake : Snowflake.Configuration
     }
 
 
@@ -28,10 +33,12 @@ main =
                 t =
                     transform (2 * radius) 0 radius (radius * sqrt 3) 0 0
             in
-            { size = 640
-            , viewBox = viewBoxFromWidth 1000
-            , radius = radius
-            , basis = Basis.transform t Basis.standard
+            { snowflake =
+                { size = 640
+                , viewBox = viewBoxFromWidth 1000
+                , radius = radius
+                , basis = Basis.transform t Basis.standard
+                }
             }
 
         scene =
@@ -58,14 +65,14 @@ viewBoxFromWidth width =
     { width = width, minimum = negate <| width // 2 }
 
 
-init : Snowflake.Configuration -> Snowflake.Model -> a -> ( Model, Cmd Msg )
-init configuration snowflake flags =
+init : Configuration -> Snowflake.Model -> a -> ( Model, Cmd Msg )
+init configuration snowflake _ =
     ( { configuration = configuration, snowflake = snowflake }, Cmd.none )
 
 
 view : Model -> Svg a
 view { configuration, snowflake } =
-    Snowflake.view configuration snowflake
+    Snowflake.view configuration.snowflake snowflake
 
 
 type Msg

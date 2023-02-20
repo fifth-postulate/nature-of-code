@@ -1,4 +1,4 @@
-module Snowflake exposing (Configuration, Flake, Model, Msg(..), Path, ViewBox, hasPath, isNear, pathGuard, scene, update, view)
+module Snowflake exposing (Configuration, Flake, Model, Msg(..), Path, ViewBox, hasPath, isNear, pathGuard, scene, size, update, view)
 
 import Basis exposing (Basis, coordinate)
 import Basis.Coordinate exposing (Axis(..), project)
@@ -31,6 +31,11 @@ type Model
 hasPath : Model -> Bool
 hasPath (Scene { path }) =
     not <| List.isEmpty path
+
+
+size : Model -> Int
+size (Scene { flake }) =
+    List.length flake
 
 
 pathGuard : (Location -> Bool) -> Model -> Bool

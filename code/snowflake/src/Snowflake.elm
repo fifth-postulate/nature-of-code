@@ -142,7 +142,8 @@ swap f b a =
 view : Configuration -> Model -> Svg a
 view configuration (Scene s) =
     Svg.svg
-        [ Attribute.width <| String.fromInt configuration.size
+        [ Attribute.id "snowflake"
+        , Attribute.width <| String.fromInt configuration.size
         , Attribute.height <| String.fromInt configuration.size
         , Attribute.viewBox <| viewBoxDescription configuration.viewBox
         ]

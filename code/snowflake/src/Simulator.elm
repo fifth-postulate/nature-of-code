@@ -1,9 +1,11 @@
-module Simulator exposing (..)
+port module Simulator exposing (..)
 
 import Basis
 import Basis.Location as Location exposing (Location, location)
 import Basis.Transform exposing (transform)
 import Browser
+import Css
+import File.Download as Download
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attribute
 import Html.Styled.Events as Event
@@ -12,6 +14,12 @@ import Snowflake exposing (ViewBox)
 import Svg exposing (Svg)
 import Task
 import Time exposing (every)
+
+
+port requestSvg : String -> Cmd msg
+
+
+port receiveSvg : (String -> msg) -> Sub msg
 
 
 type alias Model =
@@ -93,7 +101,7 @@ view ({ configuration, snowflake } as model) =
 
 viewControls : Model -> Html Msg
 viewControls { configuration, numberOfParticles, snowflake } =
-    Html.div []
+    Html.div [ Attribute.css [ Css.displayFlex, Css.alignItems Css.center ] ]
         [ Html.input
             [ Attribute.type_ "range"
             , Attribute.min <| String.fromInt configuration.minimumNumberOfParticles
@@ -103,7 +111,8 @@ viewControls { configuration, numberOfParticles, snowflake } =
             ]
             []
         , Html.span [] [ Html.text <| String.fromInt <| numberOfParticles ]
-        , Html.span [] [ Html.text <| String.fromInt <| Snowflake.size snowflake ]
+        , Html.span [ Attribute.css [ Css.marginLeft <| Css.px 5 ] ] [ Html.text <| String.fromInt <| Snowflake.size snowflake ]
+        , Html.button [ Event.onClick Download ] [ Html.text "Download"]
         ]
 
 
@@ -112,6 +121,8 @@ type Msg
     | Spawn Location
     | Move Location
     | ChangeNumberOfParticles String
+    | Download
+    | ReceivedSvg String
     | SnowflakeMsg Snowflake.Msg
 
 
@@ -141,6 +152,12 @@ update message model =
         Move l ->
             ( model, Task.perform SnowflakeMsg <| Task.succeed <| Snowflake.Move l )
 
+        Download ->
+            ( model, requestSvg "please" )
+
+        ReceivedSvg source ->
+            ( model, Download.string "snowflake.svg" "image/svg+xml" source )
+
         ChangeNumberOfParticles input ->
             let
                 n =
@@ -155,4 +172,5 @@ subscriptions : Model -> Sub Msg
 subscriptions _ =
     Sub.batch
         [ every 100 (\_ -> Tick)
+        , receiveSvg ReceivedSvg
         ]

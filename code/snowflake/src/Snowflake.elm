@@ -3,8 +3,8 @@ module Snowflake exposing (Configuration, Flake, Model, Msg(..), Path, ViewBox, 
 import Basis exposing (Basis, coordinate)
 import Basis.Coordinate exposing (Axis(..), project)
 import Basis.Location as Location exposing (Location, location)
-import Svg exposing (Svg, a)
-import Svg.Attributes as Attribute
+import Svg.Styled as Svg exposing (Svg)
+import Svg.Styled.Attributes as Attribute
 
 
 type alias Configuration =

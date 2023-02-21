@@ -4,9 +4,9 @@ import Basis
 import Basis.Location as Location exposing (Location, location)
 import Basis.Transform exposing (transform)
 import Browser
-import Html exposing (Html, i)
-import Html.Attributes as Attribute
-import Html.Events as Event
+import Html.Styled as Html exposing (Html)
+import Html.Styled.Attributes as Attribute
+import Html.Styled.Events as Event
 import Random exposing (generate)
 import Snowflake exposing (ViewBox)
 import Svg exposing (Svg)
@@ -63,7 +63,7 @@ main =
     Browser.element
         { init = init configuration scene
         , update = update
-        , view = view
+        , view = view >> Html.toUnstyled
         , subscriptions = subscriptions
         }
 

@@ -10,8 +10,7 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attribute
 import Html.Styled.Events as Event
 import Random exposing (generate)
-import Snowflake exposing (ViewBox)
-import Svg exposing (Svg)
+import Snowflake exposing (Flake, ViewBox)
 import Task
 import Time exposing (every)
 
@@ -24,6 +23,7 @@ port receiveSvg : (String -> msg) -> Sub msg
 
 type alias Model =
     { configuration : Configuration
+    , seed : Flake
     , snowflake : Snowflake.Model
     , numberOfParticles : Int
     }
@@ -53,23 +53,25 @@ main =
                 , radius = radius
                 , basis = Basis.transform t Basis.standard
                 }
-            , minimumNumberOfParticles = 10
+            , minimumNumberOfParticles = 7
             , maximumNumberOfParticles = 500
             }
 
+        seed =
+            [ location 0 0
+            , location 1 0
+            , location 0 1
+            , location -1 1
+            , location -1 0
+            , location 0 -1
+            , location 1 -1
+            ]
+
         scene =
-            Snowflake.scene
-                [ location 0 0
-                , location 1 0
-                , location 0 1
-                , location -1 1
-                , location -1 0
-                , location 0 -1
-                , location 1 -1
-                ]
+            Snowflake.scene seed
     in
     Browser.element
-        { init = init configuration scene
+        { init = init configuration seed
         , update = update
         , view = view >> Html.toUnstyled
         , subscriptions = subscriptions
@@ -81,9 +83,14 @@ viewBoxFromWidth width =
     { width = width, minimum = negate <| width // 2 }
 
 
-init : Configuration -> Snowflake.Model -> a -> ( Model, Cmd Msg )
-init configuration snowflake _ =
+init : Configuration -> Flake -> a -> ( Model, Cmd Msg )
+init configuration seed _ =
+    let
+        snowflake =
+            Snowflake.scene seed
+    in
     ( { configuration = configuration
+      , seed = seed
       , snowflake = snowflake
       , numberOfParticles = (configuration.maximumNumberOfParticles + configuration.minimumNumberOfParticles) // 2
       }
@@ -102,17 +109,19 @@ view ({ configuration, snowflake } as model) =
 viewControls : Model -> Html Msg
 viewControls { configuration, numberOfParticles, snowflake } =
     Html.div [ Attribute.css [ Css.displayFlex, Css.alignItems Css.center ] ]
-        [ Html.input
+        [ Html.button [ Event.onClick Reset ] [ Html.text "↻" ]
+        , Html.input
             [ Attribute.type_ "range"
             , Attribute.min <| String.fromInt configuration.minimumNumberOfParticles
             , Attribute.max <| String.fromInt configuration.maximumNumberOfParticles
+            , Attribute.step <| "6"
             , Attribute.value <| String.fromInt numberOfParticles
             , Event.onInput ChangeNumberOfParticles
             ]
             []
         , Html.span [] [ Html.text <| String.fromInt <| numberOfParticles ]
         , Html.span [ Attribute.css [ Css.marginLeft <| Css.px 5 ] ] [ Html.text <| String.fromInt <| Snowflake.size snowflake ]
-        , Html.button [ Event.onClick Download ] [ Html.text "Download"]
+        , Html.button [ Event.onClick Download ] [ Html.text "⭳" ]
         ]
 
 
@@ -121,6 +130,7 @@ type Msg
     | Spawn Location
     | Move Location
     | ChangeNumberOfParticles String
+    | Reset
     | Download
     | ReceivedSvg String
     | SnowflakeMsg Snowflake.Msg
@@ -151,6 +161,9 @@ update message model =
 
         Move l ->
             ( model, Task.perform SnowflakeMsg <| Task.succeed <| Snowflake.Move l )
+
+        Reset ->
+            ( { model | snowflake = Snowflake.scene model.seed }, Cmd.none )
 
         Download ->
             ( model, requestSvg "please" )

@@ -69,3 +69,6 @@ class: middle, center
 
 # &#128506;&#129517;
 
+---
+background-image: url(https://fifth-postulate.nl/image/me.jpg)
+background-position: center

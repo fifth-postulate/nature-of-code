@@ -70,5 +70,11 @@ class: middle, center
 # &#128506;&#129517;
 
 ---
+name: introduction
 background-image: url(https://fifth-postulate.nl/image/me.jpg)
 background-position: center
+
+---
+template: introduction
+
+![A rendition of a backgammon board](image/backgammon.png)

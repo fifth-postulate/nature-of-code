@@ -40,7 +40,7 @@ class: middle, center
 # &#128337;&#63;
 
 ---
-<!-- Rat Race -->
+<!-- Rat Race -->as
 
 # &#128000;&#127937;
 
@@ -77,4 +77,30 @@ background-position: center
 ---
 template: introduction
 
-![A rendition of a backgammon board](image/backgammon.png)
+.image.wide[![My kids at wintersport](image/kids.jpg)]
+
+---
+template: introduction
+
+.image.wide[![A rendering of a backgammon board](image/backgammon.png)]
+
+---
+template: introduction
+
+.image.tall[![Me as dancer](image/me-as-dancer.jpg)]
+
+---
+template: introduction
+
+.image.tall[![Me as diver](image/me-as-diver.jpg)]
+
+---
+template: introduction
+
+.image.wide[![Me as climber](image/me-as-climber.jpg)]
+
+---
+template: introduction
+
+.image.tall[![Me as BJJ practitioner](image/me-as-bjj-practitioner.jpg)]
+

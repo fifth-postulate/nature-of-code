@@ -1,4 +1,4 @@
-module Flake.Location exposing (Location, add, location)
+module Flake.Location exposing (Location, add, coordinateX, coordinateY, location)
 
 
 type Location
@@ -13,3 +13,13 @@ location x y =
 add : Location -> Location -> Location
 add (Location left) (Location right) =
     Location { x = left.x + right.x, y = left.y + right.y }
+
+
+coordinateX : Location -> Float
+coordinateX (Location { x }) =
+    x
+
+
+coordinateY : Location -> Float
+coordinateY (Location { y }) =
+    y

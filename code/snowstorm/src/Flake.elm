@@ -1,22 +1,23 @@
 module Flake exposing (Model, at, update, view)
 
-import Debug
 import Flake.Location as Location exposing (Location, location)
 import Flake.Time exposing (Time)
 import Flake.Velocity as Velocity exposing (Velocity, displacement)
-import Html exposing (Html)
+import Svg exposing (Svg)
+import Svg.Attributes as Attribute
 
 
 type Model
     = Flake
-        { location : Location
+        { id : String
+        , location : Location
         , velocity : Velocity
         }
 
 
 at : Location -> Model
 at location =
-    Flake { location = location, velocity = Velocity.zero }
+    Flake { id = "flake", location = location, velocity = Velocity.zero }
 
 
 update : Time -> Model -> Model
@@ -31,6 +32,15 @@ update time (Flake flake) =
     Flake { flake | location = location }
 
 
-view : Model -> Html msg
-view model =
-    Html.text <| Debug.toString model
+view : Model -> Svg msg
+view (Flake model) =
+    let
+        fragment identifier =
+            "#" ++ identifier
+    in
+    Svg.use
+        [ Attribute.xlinkHref <| fragment model.id
+        , Attribute.x <| String.fromFloat <| Location.coordinateX model.location
+        , Attribute.y <| String.fromFloat <| Location.coordinateY model.location
+        ]
+        []

@@ -8,4 +8,11 @@
       MathJax.typeset();
     }
   })
+
+  slideshow.on('showSlide', function(slide){
+    const node = document.getElementById('primes');
+    if (!!node) {
+      const primesApp = Elm.Prime.init({node: node});
+    }
+  })
 })();

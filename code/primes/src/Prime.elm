@@ -3,6 +3,7 @@ module Prime exposing (main)
 import Browser
 import Deque exposing (Deque)
 import Html.Styled as Html exposing (Html)
+import Html.Styled.Attributes as Attribute
 import Html.Styled.Events as Event
 import Prime.Stream as Stream exposing (Stream)
 import Task
@@ -22,8 +23,9 @@ main =
 init : a -> ( Model, Cmd Msg )
 init _ =
     let
-        target = 
-            300
+        target =
+            37
+
         configuration =
             { delay = 200 }
     in
@@ -51,6 +53,7 @@ type alias Configuration =
 type Msg
     = Advance
     | Tick
+    | UpdateTarget String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -74,6 +77,15 @@ update msg model =
             in
             ( { model | stream = stream, primes = Deque.pushBack p model.primes }, Cmd.none )
 
+        UpdateTarget value ->
+            let
+                target =
+                    value
+                        |> String.toInt
+                        |> Maybe.withDefault 37
+            in
+            ( { model | target = target }, Cmd.none )
+
 
 view : Model -> Html Msg
 view model =
@@ -87,6 +99,16 @@ view model =
     in
     Html.div []
         [ Html.button [ Event.onClick Advance ] [ Html.text "𝌙" ]
+        , Html.input
+            [ Event.onInput UpdateTarget
+            , Attribute.type_ "range"
+            , Attribute.value <| String.fromInt model.target
+            , Attribute.min "10"
+            , Attribute.max "200"
+            , Attribute.step "10"
+            ]
+            []
+        , Html.span [] [ Html.text <| String.fromInt <| model.target ]
         , Html.blockquote [] <| List.intersperse comma <| Deque.toList <| Deque.map toCode model.primes
         ]
 

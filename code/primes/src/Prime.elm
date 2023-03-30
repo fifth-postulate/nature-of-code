@@ -1,6 +1,7 @@
 module Prime exposing (main)
 
 import Browser
+import Css
 import Deque exposing (Deque)
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attribute
@@ -98,17 +99,19 @@ view model =
             Html.text ", "
     in
     Html.div []
-        [ Html.button [ Event.onClick Advance ] [ Html.text "𝌙" ]
-        , Html.input
-            [ Event.onInput UpdateTarget
-            , Attribute.type_ "range"
-            , Attribute.value <| String.fromInt model.target
-            , Attribute.min "10"
-            , Attribute.max "200"
-            , Attribute.step "10"
+        [ Html.span [ Attribute.css [ Css.displayFlex, Css.flexWrap Css.noWrap, Css.alignItems Css.center ] ]
+            [ Html.button [ Event.onClick Advance ] [ Html.text "𝌙" ]
+            , Html.input
+                [ Event.onInput UpdateTarget
+                , Attribute.type_ "range"
+                , Attribute.value <| String.fromInt model.target
+                , Attribute.min "10"
+                , Attribute.max "200"
+                , Attribute.step "10"
+                ]
+                []
+            , Html.span [] [ Html.text <| String.fromInt <| model.target ]
             ]
-            []
-        , Html.span [] [ Html.text <| String.fromInt <| model.target ]
         , Html.blockquote [] <| List.intersperse comma <| Deque.toList <| Deque.map toCode model.primes
         ]
 

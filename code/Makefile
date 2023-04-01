@@ -1,4 +1,4 @@
-SUB_DIRECTORIES=primes snowflake snowstorm
+SUB_DIRECTORIES=primes snowflake
 
 .PHONY: all ${SUB_DIRECTORIES}
 

@@ -2,11 +2,13 @@ layout: true
 class: middle, center
 
 ---
-
+name: nature
 # Nature of ~~Code~~ Storytelling
 
 ---
+name: story
 class: story
+
 # Once Upon a Time...
 
 ---
@@ -45,17 +47,17 @@ class: story
 ---
 <!-- Time -->
 
-# &#128337;&#63;
+# &#128337; &#63;
 
 ---
 <!-- Rat Race -->
 
-# &#128000;&#127937;
+# &#128000; &#127937;
 
 ---
 <!-- Searching Sparkles -->
 
-# &#128270;&#10024;
+# &#128270; &#10024;
 
 ---
 <!-- Meditate -->
@@ -65,17 +67,17 @@ class: story
 ---
 <!-- Smell Roses -->
 
-# &#128067;&#127801;
+# &#128067; &#127801;
 
 ---
 <!-- Shock Party -->
 
-# &#128561;&#129395;
+# &#128561; &#129395;
 
 ---
 <!-- Map  Compass -->
 
-# &#128506;&#129517;
+# &#128506; &#129517;
 
 ---
 name: introduction
@@ -141,13 +143,14 @@ BoosterConf 2018
 </textarea>
 
 ---
+template: story
+
+---
 background-image: url(image/commodore-64.png)
 background-size: contain
 
 ---
-class: story
-
-# Once Upon a Time...
+template: story
 
 ---
 
@@ -158,5 +161,90 @@ class: story
 .image.tall[![A stepper moter](image/stepper-motor.png)]
 
 ---
+template: story
+
+---
 
 <code id="primes"></code>
+
+---
+template: story
+
+---
+
+.image.tall[![Koch Curve](image/koch.png)]
+
+---
+template: story
+
+---
+
+# Best Wishes
+
+--
+
+.wishes[
+* [2013](http://dvberkel.github.io/2013-wishes/index.html?u=10&v=3&w=SGF2ZSBhIHdvbmRlcmZ1bGwgMjAxMyE%3D)
+* [2014](http://dvberkel.github.io/2014-wishes)
+* [2015](http://dvberkel.github.io/2015-wishes)
+* [2016](http://dvberkel.github.io/2016-wishes)
+* [2017](http://dvberkel.github.io/2017-wishes)
+* [2018](http://dvberkel.github.io/2018-wishes)
+* [2019](http://dvberkel.github.io/2019-wishes)
+]
+
+---
+template: story
+
+---
+
+# [Fleeting Thoughts](https://dvberkel.github.io/fleeting-thoughts/)
+
+---
+
+# &#x7652;
+
+---
+template: story
+
+---
+
+# [.image.tall[![Snowflake](../image/snowflake-000.png)]](https://fifth-postulate.nl/nature-of-code/demo/snowflake)
+
+---
+template: story
+
+---
+<!-- Ball of yarn -->
+
+# &#129526;
+
+---
+<!-- Laptop -->
+
+# &#128187;
+
+---
+<!-- Bag of Money -->
+
+# &#128176;
+
+---
+<!-- Vehicle of Thought -->
+
+# &#128665; &#128173;
+
+---
+<!-- Dancing & Painting -->
+
+# &#128378; &#127912;
+
+---
+<!-- Connection -->
+
+# &#128279;
+
+---
+template: nature
+
+# &#128279;

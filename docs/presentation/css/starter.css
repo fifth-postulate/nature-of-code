@@ -30,3 +30,16 @@ span.wide.image img {
     background-color: black;
     color: white;
 }
+
+.wishes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wishes ul{
+    width: 250px;
+}
+.wishes li {
+    text-align: left;
+}
